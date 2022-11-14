@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 02:52 PM
+-- Generation Time: Nov 14, 2022 at 03:55 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -28,26 +28,43 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `smestaj` (
-  `idsmestaja` int(11) NOT NULL,
-  `tip` varchar(255) NOT NULL,
+  `smestajid` int(11) NOT NULL,
   `kapacitet` int(20) NOT NULL,
-  `cena` int(20) NOT NULL
+  `cena` int(20) NOT NULL,
+  `idtip` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `smestaj`
 --
 
-INSERT INTO `smestaj` (`idsmestaja`, `tip`, `kapacitet`, `cena`) VALUES
-(1, 'soba', 2, 40),
-(2, 'soba', 3, 50),
-(3, 'soba', 4, 55),
-(4, 'apartman', 4, 100),
-(5, 'apartman', 5, 120),
-(6, 'apartman', 6, 140),
-(7, 'lux apartman', 4, 200),
-(8, 'lux apartman', 5, 220),
-(9, 'lux apartman', 6, 300);
+INSERT INTO `smestaj` (`smestajid`, `kapacitet`, `cena`, `idtip`) VALUES
+(1, 2, 40, 1),
+(2, 3, 50, 1),
+(3, 4, 100, 2),
+(4, 5, 120, 2),
+(5, 4, 200, 3),
+(6, 5, 250, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tipsmestaja`
+--
+
+CREATE TABLE `tipsmestaja` (
+  `idtip` int(11) NOT NULL,
+  `nazivtipa` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tipsmestaja`
+--
+
+INSERT INTO `tipsmestaja` (`idtip`, `nazivtipa`) VALUES
+(1, 'soba'),
+(2, 'apartman'),
+(3, 'lux apartman');
 
 -- --------------------------------------------------------
 
@@ -66,7 +83,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`) VALUES
-(1, 'BojanaNovakovic', 'user');
+(1, 'admin', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -76,13 +93,30 @@ INSERT INTO `user` (`id`, `name`, `password`) VALUES
 -- Indexes for table `smestaj`
 --
 ALTER TABLE `smestaj`
-  ADD PRIMARY KEY (`idsmestaja`);
+  ADD PRIMARY KEY (`smestajid`),
+  ADD KEY `spoljni kljuc` (`idtip`);
+
+--
+-- Indexes for table `tipsmestaja`
+--
+ALTER TABLE `tipsmestaja`
+  ADD PRIMARY KEY (`idtip`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `smestaj`
+--
+ALTER TABLE `smestaj`
+  ADD CONSTRAINT `spoljni kljuc` FOREIGN KEY (`idtip`) REFERENCES `tipsmestaja` (`idtip`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
