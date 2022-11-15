@@ -42,6 +42,63 @@ $psmestaj = Smestaj::getAll($conn);
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn {
+  background-color: Orange;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: Green;
+}
+</style>
 </head>
 
 <body>
@@ -134,13 +191,13 @@ $psmestaj = Smestaj::getAll($conn);
     <div id="pregled" class="panel panel-success" style="margin-top: 1%;">
 
         <div class="panel-body">
-            <table id="myTable" class="table table-hover table-striped" style="color: black; background-color: grey;">
+            <table id="myTable" class="table table-hover table-striped" style="color: black; background-color: white;">
                 <thead class="thead">
                     <tr>
                         <th scope="col">Tip Smeštaja</th>
                         <th scope="col">Kapacitet</th>
                         <th scope="col">Cena</th>
-                        <th scope="col">Rezerviši</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -152,12 +209,7 @@ $psmestaj = Smestaj::getAll($conn);
                             <td><?php echo $red["kapacitet"] ?></td>
                             <td><?php echo $red["cena"] ?></td>
 
-                            <td>
-                                <label class="custom-radio-btn">
-                                    <input type="radio" name="checked-donut" value=<?php echo $red["idtip"] ?>>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td>
+                            
 
                         </tr>
                 <?php
@@ -171,19 +223,60 @@ $psmestaj = Smestaj::getAll($conn);
         </div>
     </div>
 
-    <div class="col-md-4">
-        <button id="btn-dodaj" type="button" class="btn btn-success btn-block"
-                style="background-color:black ; border: 1px solid white;" data-toggle="modal" data-target="#myModal"> Rezerviši smeštaj</button>
+    <!-- Trigger/Open The Modal -->
+<button id="myBtn" style="border: 1px solid orange">Rezerviši</button>
 
-    </div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
 
-    <div class="modal fade" id="myModal" role="dialog" >
-    <div class="modal-dialog">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Unesite potrebne podatke</p><br>
+    <form>
+  Ime:<br> <input type="text" /><br />
+  Prezime:<br> <input type="text" /><br />
+  TipSmestaja:<br> <input type="radio" name="tip" value="soba" 
+    checked>Soba<br />
+  <input type="radio" name="tip" value="apartman">
+    Apartman<br />
+  <input type="radio" name="tip" value="lux apartman">
+    Lux apartman<br />
+    Kapacitet:<br> <input type="text" /><br />
+    Datum <br><input type="date"  style="border: 1px solid black" name="datum" class="form-control"/>
+</form>
+<button id="myBtn" style="border: 1px solid orange">Rezerviši</button>
+  </div>
 
-        
-        
-    </div>
-            
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>        
            
 
 
