@@ -54,7 +54,7 @@
                         <a href="home.php" class="nav-item nav-link active">Početna</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="smestaj.php" class="nav-item nav-link active">Smeštaj</a>
+                        <a href="hotelski_smestaj.php" class="nav-item nav-link active">Smeštaj</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
                         <a href="rezervacija.php" class="nav-item nav-link active">Rezervacije</a>

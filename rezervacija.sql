@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 03:55 PM
+-- Generation Time: Nov 14, 2022 at 05:23 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `smestaj` (
   `smestajid` int(11) NOT NULL,
   `kapacitet` int(20) NOT NULL,
-  `cena` int(20) NOT NULL,
+  `cena` int(20) NOT NULL COMMENT 'EUR',
   `idtip` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -62,9 +62,9 @@ CREATE TABLE `tipsmestaja` (
 --
 
 INSERT INTO `tipsmestaja` (`idtip`, `nazivtipa`) VALUES
-(1, 'soba'),
-(2, 'apartman'),
-(3, 'lux apartman');
+(1, 'Soba'),
+(2, 'Apartman'),
+(3, 'Lux apartman');
 
 -- --------------------------------------------------------
 

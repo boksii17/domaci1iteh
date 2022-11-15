@@ -20,18 +20,5 @@ class TipSmestaja{
         return $conn->query($query);
     }
 
-    public static function getById($id, mysqli $conn){
-        $query = "SELECT nazivtipa FROM tipSmestaja WHERE tipid=$id";
-
-        $myObj = array();
-        if($msqlObj = $conn->query($query)){
-            while($red = $msqlObj->fetch_array(1)){
-                $myObj[]= $red;
-            }
-        }
-
-        return $myObj;
-
-    }
 }
 ?>

@@ -1,4 +1,6 @@
 <?php
+
+
 class Smestaj{
     public $smestajid;   
     public $kapacitet;   
@@ -20,5 +22,7 @@ class Smestaj{
         $query = "SELECT * FROM smestaj";
         return $conn->query($query);
     }
+
+
 }
 ?>

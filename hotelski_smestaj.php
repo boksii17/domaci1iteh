@@ -2,6 +2,7 @@
 
 require "dbBroker.php";
 require "model/smestaj.php";
+require "model/tipSmestaja.php";
 
 session_start();
 if (!isset($_SESSION['user_id'])) {
@@ -9,15 +10,8 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$podaci = Smestaj::getAll($conn);
-if (!$podaci) {
-    echo "Nastala je greška pri preuzimanju podataka";
-    die();
-}
-if ($podaci->num_rows == 0) {
-    echo "Nema ucitanog smestaja";
-    die();
-} else {
+$psmestaj = Smestaj::getAll($conn);
+
 
 ?>
 <!DOCTYPE html>
@@ -76,7 +70,7 @@ if ($podaci->num_rows == 0) {
                         <a href="home.php" class="nav-item nav-link active">Početna</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="smestaj.php" class="nav-item nav-link active">Smeštaj</a>
+                        <a href="hotelski_smestaj.php" class="nav-item nav-link active">Smeštaj</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
                         <a href="rezervacija.php" class="nav-item nav-link active">Rezervacije</a>
@@ -146,14 +140,15 @@ if ($podaci->num_rows == 0) {
                         <th scope="col">Tip Smeštaja</th>
                         <th scope="col">Kapacitet</th>
                         <th scope="col">Cena</th>
+                        <th scope="col">Rezerviši</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    while ($red = $podaci->fetch_array()) :
+                    while ($red = $psmestaj->fetch_array()) :
                     ?>
                         <tr>
-                            <td><?php echo $red["idtip"] ?></td>
+                            <td><?php echo $red["idtip"]?></td>
                             <td><?php echo $red["kapacitet"] ?></td>
                             <td><?php echo $red["cena"] ?></td>
 
@@ -167,12 +162,28 @@ if ($podaci->num_rows == 0) {
                         </tr>
                 <?php
                     endwhile;
-                } #zatvaranje elsa otvorenog na liniji 21
+                 #zatvaranje elsa otvorenog na liniji 21
                 ?>
                
 
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <button id="btn-dodaj" type="button" class="btn btn-success btn-block"
+                style="background-color:black ; border: 1px solid white;" data-toggle="modal" data-target="#myModal"> Rezerviši smeštaj</button>
+
+    </div>
+
+    <div class="modal fade" id="myModal" role="dialog" >
+    <div class="modal-dialog">
+
+        
+        
+    </div>
+            
            
 
 
